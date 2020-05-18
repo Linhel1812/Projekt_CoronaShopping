@@ -1,0 +1,73 @@
+<h1>Einkaufslistenformular</h1>
+
+<form  class="ui large form" [formGroup]="shoppinglistForm" (ngSubmit)="submitForm()">
+    <input type="hidden" name="id">
+    <div *ngIf="authService.getCurrentUserRole() !== 'Shopper'" class="field">
+        <label>Name der Einkaufsliste</label>
+        <input formControlName="name">
+        <div *ngIf="errors.name" class="ui negative message"> {{ errors.name }} </div>
+    </div>
+    <!--div class="field">
+        <label>Untertitel</label>
+        <input formControlName="subtitle">
+    </div-->
+    <!--div class="field" [class.disabled]="isUpdatingShoppinglist">
+        <label>ISBN-Nummer</label>
+        <input formControlName="isbn">
+        <div *ngIf="errors.isbn" class="ui negative message">{{ errors.isbn }} </div>
+    </div-->
+    <div *ngIf="authService.getCurrentUserRole() !== 'Shopper'" class="field">
+        <label>Fälligkeitsdatum</label>
+        <input type="date" formControlName="due_date">
+        <div *ngIf="errors.due_date" class="ui negative message">{{ errors.due_date }}</div>
+    </div>
+    <div class="field">
+        <label>Preis</label>
+        <input formControlName="actual_price">
+        <div *ngIf="errors.actual_price" class="ui negative message"> {{ errors.actual_price }} </div>
+    </div>
+    <!--div class="field">
+        <label>Rating</label>
+        <input type="number" formControlName="rating">
+        <div *ngIf="errors.rating" class="ui negative message">{{ errors.rating }}</div>
+    </div-->
+    <div *ngIf="authService.getCurrentUserRole() !== 'Shopper'" class="field">
+        <label>Artikel</label>
+        <div formArrayName="items">
+            <div class="fields" *ngFor="let control of items?.controls; index as i; last as l" [formGroupName]="i">
+                <input type="hidden" name="id">
+                <div class="nine wide field">
+                    <input formControlName="name" placeholder="Artikelname">
+                </div>
+                <div class="six wide field">
+                    <input formControlName="quantity" placeholder="Anzahl">
+                </div>
+                <div class="six wide field">
+                    <input formControlName="max_price" placeholder="Maximaler Preis">
+                </div>
+                <div class="one wide field" *ngIf="l">
+                    <button (click)="addThumbnailControl()" class="ui large button" type="button">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- test -->
+    <div class="field">
+        <label>Kommentare</label>
+        <div formArrayName="comments">
+            <div class="fields" *ngFor="let control of comments?.controls; index as i; last as l" [formGroupName]="i">
+                <input type="hidden" name="id">
+                <div class="nine wide field">
+                    <input formControlName="text" placeholder="Kommentar">
+                </div>
+                <div class="one wide field" *ngIf="l">
+                    <button (click)="addThumbnailControl2()" class="ui large button" type="button">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="ui button" [disabled]="shoppinglistForm.invalid">Speichern</button>
+</form>

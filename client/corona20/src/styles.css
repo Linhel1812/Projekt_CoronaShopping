@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+
+.headline{
+    font-size: 50px;
+    color: #636363;
+    font-family: 'Jost', sans-serif;
+    text-align: center;
+    top: 50px;
+    padding-top: 50px;
+}
+
+.headertxt{
+    font-family: 'Jost', sans-serif;
+    text-align: center;
+}
+
+#homecontainer{
+    text-align: center;
+}
+
+.header{
+    font-size: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #636363;
+    font-family: 'Jost', sans-serif;
+}
+
+.listtxt{
+    font-size: 15px;
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #636363;
+    font-family: 'Jost', sans-serif;
+}
+
+.pad-top{
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.center{
+    padding-top: 30px;
+    text-align: center;
+}
+
+.bolder{
+    font-weight: bold;
+
+}
+
+.normaltxt{
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    padding-bottom: 5px;
+}

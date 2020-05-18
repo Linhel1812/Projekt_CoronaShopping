@@ -1,0 +1,105 @@
+<!--p>shoppinglist-details works!</p-->
+
+
+<div *ngIf="shoppinglist" class="ui grid">
+    <div class="four wide column">
+        <!--img class="ui large image" *ngIf="book?.images && book?.images[0]"
+             [src]="book.images[0].url"-->
+    </div>
+
+    <div class="twelve wide column">
+        <h1 class="ui header">{{ shoppinglist?.name }}</h1>
+        <h3 class="ui header">Fälligkeitsdatum: {{ shoppinglist?.due_date }}</h3>
+        <div class="ui divider"></div>
+        <div class="ui grid">
+            <div class="three wide column">
+                <h4 class="ui header">Artikelname</h4>
+                <div *ngFor="let item of shoppinglist.items;">
+                    {{item.name}} </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui header">Stückzahl</h4>
+                <div *ngFor="let item of shoppinglist.items;">
+                    {{item.quantity}} x</div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui header">Maximaler Preis</h4>
+                <div *ngFor="let item of shoppinglist.items;">
+                    {{item.max_price}} €</div>
+            </div>
+            <!--div class="four wide column">
+                <h4 class="ui header">Creator ID</h4>
+                {{ shoppinglist?.creator_id }}
+            </div-->
+
+            <!--div class="four wide column">
+                <h4 class="ui header">Kommentare</h4>
+                <div *ngFor="let com of shoppinglist.comments;">{{com.user_id}} {{com.text}}</div>
+            </div-->
+
+        </div>
+
+        <div>
+            <div class="pad-top">
+                <h3 class="ui header">Finaler Einkaufspreis:</h3>
+                <div class="normaltxt">{{ shoppinglist?.actual_price }} €</div>
+            </div>
+            <div class="pad-top">
+                <h3 class="ui header">Kommentare:</h3>
+                <div class="normaltxt" *ngFor="let com of shoppinglist?.comments;">
+                    {{com.text}} </div>
+            </div>
+            <div class="pad-top">
+                <h3 class="ui header">Kontaktdaten von <span>{{shoppinglist?.creator.firstName}} {{shoppinglist?.creator.lastName}}</span>:</h3>
+                <div>
+                    <div class="normaltxt"><span class="bolder">Stadt:</span> {{shoppinglist?.creator.city}}</div>
+                    <div class="normaltxt"><span class="bolder">Adresse:</span>  {{shoppinglist?.creator.street}} {{shoppinglist?.creator.plz}} </div>
+                    <div class="normaltxt"><span class="bolder"> Email: </span>{{shoppinglist?.creator.email}}</div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--div class="sixteen wide column">
+        <div class="ui small images">
+            <!img *ngFor="let thumbnail of book?.images" [src]="thumbnail.url">
+        </div>
+
+    </div-->
+</div>
+
+
+<!--button (click)="showShoppingList()" class="ui red button">Zurück zur Übersichti</button-->
+<div class="center">
+
+
+<button *ngIf="authService.isLoggedIn() && authService.getCurrentUserId()== shoppinglist.creator_id"
+        class="ui tiny red labeled icon button" (click)="removeShoppinglist()">
+    <i class="remove icon"></i>Einkaufsliste löschen</button>
+
+<a *ngIf="authService.isLoggedIn()" class="ui tiny yellow labeled icon button"
+   [routerLink]="['../../admin', shoppinglist?.id]">
+    <i class="write icon"></i> Einkaufsliste bearbeiten
+</a>
+
+    <!-- liste übernehmen-->
+    <button *ngIf="authService.isLoggedIn() && authService.getCurrentUserId()!== shoppinglist.creator_id && authService.getCurrentUserRole() === 'Shopper'"
+            class="ui tiny red labeled icon button" (click)="takeShoppinglist()">
+        <i class="remove icon"></i>Einkaufsliste übernehmen</button>
+
+
+
+    <br/><br/><br/>
+    <button [routerLink]="'/shoppinglists'" class="ui red button">Zurück zur Übersicht</button>
+
+</div>
+
+<!--button *ngIf="authService.isLoggedIn()" class="ui tiny red labeled icon button" (click)="removeBook()">
+    <i class="remove icon"></i>Buch löschen
+</button-->
+
+<!--a *ngIf="authService.isLoggedIn()" class="ui tiny yellow labeled icon button" [routerLink]="['../../admin', book.isbn]">
+    <i class="write icon"></i> Buch bearbeiten
+</a-->
